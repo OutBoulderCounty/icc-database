@@ -43,7 +43,6 @@ func Connect(env string) (*DB, error) {
 	svc := ssm.New(sess)
 	fmt.Println("app env:", env)
 	path := fmt.Sprintf("/icc/%s/database/", env)
-	fmt.Println("path:", path)
 	decrypt := true
 	input := ssm.GetParametersByPathInput{
 		Path:           &path,
@@ -58,7 +57,6 @@ func Connect(env string) (*DB, error) {
 	for i := 0; i < len(params); i++ {
 		name := *params[i].Name
 		value := *params[i].Value
-		fmt.Println(name + ": " + value)
 		switch {
 		case strings.HasSuffix(name, "host"):
 			c.Host = value
