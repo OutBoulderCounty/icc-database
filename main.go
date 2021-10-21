@@ -44,8 +44,10 @@ func Connect(env string) (*DB, error) {
 	fmt.Println("app env:", env)
 	path := fmt.Sprintf("/icc/%s/database/", env)
 	fmt.Println("path:", path)
+	decrypt := true
 	input := ssm.GetParametersByPathInput{
-		Path: &path,
+		Path:           &path,
+		WithDecryption: &decrypt,
 	}
 	out, err := svc.GetParametersByPath(&input)
 	if err != nil {
