@@ -71,6 +71,8 @@ func Connect(env string) (*DB, error) {
 		}
 	}
 
+	// overriding name value
+	c.Name = "dev"
 	db, err := sql.Open("mysql", fmt.Sprintf("%s:%s@tcp(%s:%s)/%s?tls=true", c.User, c.Password, c.Host, c.Port, c.Name))
 	if err != nil {
 		return nil, err
